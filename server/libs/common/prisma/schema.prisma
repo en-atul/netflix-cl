@@ -11,19 +11,63 @@ datasource db {
 }
 
 model User {
-  id         String      @id @default(uuid())
-  createdAt  DateTime    @default(now())
-  username   String      @unique
-  password   String
-  watchlists WatchList[]
+  id             String      @id @default(uuid())
+  createdAt      DateTime    @default(now())
+  email          String      @unique
+  fullname       String
+  password       String
+  likedMovies    Movies[]
+  likedWebSeries WebSeries[]
 }
 
-model WatchList {
-  id          String   @id @default(uuid())
-  createdAt   DateTime @default(now())
-  name        String
-  belongsTo   User     @relation(fields: [belongsToId], references: [id])
-  belongsToId String
+model Movies {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  @@unique([id, belongsToId])
+  name    String
+  poster  String
+  url     String
+  artists Artist[]
+
+  likedBy   User?  @relation(fields: [likedById], references: [id])
+  likedById String
+
+  @@unique([id, likedById])
+}
+
+model WebSeries {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name     String
+  poster   String
+  url      String
+  episodes Episode[]
+  artists  Artist[]
+
+  likedBy   User?  @relation(fields: [likedById], references: [id])
+  likedById String
+
+  @@unique([id, likedById])
+}
+
+model Episode {
+  id          String     @id @default(uuid())
+  name        String
+  poster      String
+  url         String
+  WebSeries   WebSeries? @relation(fields: [webSeriesId], references: [id])
+  webSeriesId String?
+}
+
+model Artist {
+  id          String     @id @default(uuid())
+  name        String
+  photo       String
+  Movies      Movies?    @relation(fields: [moviesId], references: [id])
+  moviesId    String?
+  WebSeries   WebSeries? @relation(fields: [webSeriesId], references: [id])
+  webSeriesId String?
 }
