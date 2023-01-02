@@ -15,7 +15,8 @@
       "entryFile": "main",
       "sourceRoot": "apps/auth/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/auth/tsconfig.app.json"
+        "tsConfigPath": "apps/auth/tsconfig.app.json",
+        "plugins": ["@nestjs/graphql"]
       }
     },
     "movies": {
@@ -24,7 +25,8 @@
       "entryFile": "main",
       "sourceRoot": "apps/movies/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/movies/tsconfig.app.json"
+        "tsConfigPath": "apps/movies/tsconfig.app.json",
+        "plugins": ["@nestjs/graphql"]
       }
     },
     "web-series": {
@@ -33,7 +35,8 @@
       "entryFile": "main",
       "sourceRoot": "apps/web-series/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/web-series/tsconfig.app.json"
+        "tsConfigPath": "apps/web-series/tsconfig.app.json",
+        "plugins": ["@nestjs/graphql"]
       }
     },
     "common": {
